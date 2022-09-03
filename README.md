@@ -1,0 +1,1 @@
+# flask-n11-blueprint-configuation
