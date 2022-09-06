@@ -47,4 +47,25 @@
 # 这一块还是没有完全搞懂，视频28:00左右，用了sublime来存配置路径。可是我不知道怎么把sublime里面的东西加进文件里。
 
 
+    2.1 修改地方- init.py
+    from flaskblog.config import Config
     
+    def create_app(config_class=Config): 把之前定义的app放到这里，以后可以用current——app代替，速度会快一些？
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
+
+    from flaskblog.users.routes import users
+    from flaskblog.posts.routes import posts
+    from flaskblog.main.routes import main
+    app.register_blueprint(users)
+    app.register_blueprint(posts)
+    app.register_blueprint(main)
+
+    return app
+    
+    2.2 在utils.py + models.py + run.py 里面都修改成current——app。
